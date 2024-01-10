@@ -332,13 +332,18 @@
                 </form>
             </div> --}}
             {{-- Products --}}
-            <div class="col-lg-">
+            <div class="col-lg-12">
                 <div class="container d-flex">
                     <div class="row" id="pro">
                         @foreach ($product as $item)
-                            <div class="col-6 col-md-4 col-lg-3 mt-4">
+                            @php
+                                $cov = json_decode($item->product_image);
+                                $str = implode(" ",$cov);
+                                // dd($str);
+                            @endphp
+                            <div class="col-6 col-md-3 col-lg-2 mt-4">
                                 <a href="{{ url('single-product', $item->id) }}">
-                                    <img src="product_image/{{ $item->product_image }}" class="img-fluid"
+                                    <img src="../product_image/{{ $str }}" class="img-fluid"
                                         alt="{{ $item->product_name }}">
                                 </a>
                                 <div class="row justify-content-center align-items-center g-2 mt-1 pb-1"
@@ -347,16 +352,16 @@
                                         <h5 class="item-font float-start"><strong>{{ $item->product_name }}</strong></h5>
                                     </div>
                                     <div class="col-6">
-                                        <h5 class="item-font float-end"><strong>₹ {{ $item->product_price }}</strong></h5>
+                                        <h5 class="item-font float-end"><strong>{{ $item->type->product_type }}</strong></h5>
                                     </div>
                                 </div>
-                                <div class="row pt-1">
+                                {{-- <div class="row pt-1">
                                     <div class="col-md-6">
                                         <span class="mb-0" style="font-weight: 400" id="rs">
                                             {{ $item->product_type }}
                                         </span>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         @endforeach
                     </div>
@@ -364,15 +369,11 @@
             </div>
         </div>
     </div>
-    {{-- <div class="fixed-bottom">
-
-        
+    {{-- <div class="fixed-bottom">        
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-
-                       
+                    <div class="accordion-body">                       
                         <div class="row justify-content-end pt-1 pb-1 px-3 close" data-bs-toggle="collapse"
                             data-bs-target="#collapseTwo">
                             <div class="col-1 mr-2 pt-1">
@@ -380,9 +381,7 @@
                                     <i class="fa-solid fa-xmark" style="font-size: 1.3rem"></i>
                                 </span>
                             </div>
-                        </div>
-                       
-
+                        </div>                    
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
@@ -554,7 +553,6 @@
             </div>
         </div>
     </div> --}}
-
 @endsection
 @section('script')
     <script>

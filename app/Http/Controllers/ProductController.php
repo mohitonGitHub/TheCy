@@ -11,13 +11,13 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::all();
+        $product = Product::with('type')->get();
         return view('dashboard/products', compact('product'));
     }
 
     public function create()
     {
-        $Ptype = ProductType::all();
+        $Ptype = Product::with('type')->get(); 
         return view('dashboard/add-product', compact('Ptype'));
     }
 
@@ -29,51 +29,24 @@ class ProductController extends Controller
             'product_details' => 'required',
         ]);
 
-        // dd($request);
-
         $store = new Product();
         $store->product_name = $request->product_name;
         $store->product_sub_name = $request->product_sub_name;
         $store->product_type = $request->product_type;
         $store->product_details = $request->product_details;
-        $store->gender = $request->gender;   
+        $store->gender = $request->gender;
 
-        // $image = $request->file('product_image');
 
-        if ($request->hasFile('product_image')) {
-            foreach ($request->file('images') as $image) {
+        $images = $request->product_image;
+        if ($images) {
+            foreach ($images as $image) {
                 $imageName = rand() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('product_image', $imageName); // Store image in storage                
-                $store->product_image = $imageName;
+                $image->move(public_path('product_image'), $imageName); // Store image in storage
+                $imgarr[] = $imageName;
             }
+            $obj = json_encode($imgarr);
+            $store->product_image = $obj;
         }
-
-        // if($image != ''){
-        //     // foreach($image as $img){
-        //     //     $image_name = rand() . '.' . $img->getClientOriginalExtension();
-        //     //     $img->move(public_path('product_image'), $image_name);
-        //     // }
-        //     // dd($image);
-        //     foreach ($image as $photo) {
-        //         dd($photo);
-        //         $sto = json_encode($photo);
-        //         $image_name = rand() . '.' . $photo->getClientOriginalExtension();
-        //         // $photo->move(public_path('product_image'), $image_name);
-        //     }
-
-        //     dd($sto);
-        //     $store->product_image = $image_name;
-        // }
-
-
-        // if ($image != '') {
-        //     foreach ($image as $img) {
-        //         $image_name = rand() . '.' . $image->getClientOriginalExtension();
-        //         $image->move(public_path('product_image'), $image_name);
-        //         dd($image_name);
-        //         $store->product_image = $image_name;
-        //     }
-        // }       
 
         $store->save();
 
@@ -108,60 +81,49 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
+    {        
         $request->validate([
             'product_name' => 'required',
-            'product_price' => 'required|numeric',
-            'product_type' => 'required',
-            'product_desc' => 'required',
             'product_details' => 'required',
         ]);
+
         $update = Product::findorfail($id);
-        $sizes = $request->product_size;
-        $sizesObject = json_encode($sizes);
-
         $update->product_name = $request->product_name;
-        $update->product_price = $request->product_price;
+        $update->product_sub_name = $request->product_sub_name;
         $update->product_type = $request->product_type;
-        if ($sizesObject != 'null') {
-            $update->product_size = $sizesObject;
-        } else {
-            $update->product_size = NULL;
-        }
-        $update->gender = $request->gender;
-        $update->product_color = $request->product_color;
-        $update->product_desc = $request->product_desc;
         $update->product_details = $request->product_details;
+        $update->gender = $request->gender;
 
-        $image = $request->file('product_image');
-        if ($image != '') {
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('product_image'), $image_name);
-            $update->product_image = $image_name;
-        } else {
-            $update->product_image = $request->old_product_image;
+        $images = $request->product_image;
+        if ($images) {
+            foreach ($images as $image) {
+                $imageName = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('product_image'), $imageName);
+                $imgarr[] = $imageName;
+            }
+            $obj = json_encode($imgarr);
+            $update->product_image = $obj;
+        }else{
+            $update->product_image = $request->product_old_image;
         }
         $update->save();
 
         if ($update) {
-            return redirect('product')->with('success', 'Product has been updated!!');
+            return redirect('dashboard/product')->with('success', 'Product has been updated!!');
         } else {
-            return redirect('product')->with('fail', 'Something Went wrong!! Adarsh ki galti hogi');
+            return redirect('dashboard/product')->with('fail', 'Something Went wrong!! Adarsh ki galti hogi');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $delete = Product::findorfail($id);
         $delete->delete();
 
         if ($delete) {
-            return redirect('product')->with('success', 'Product deleted sucessfully!!');
+            return redirect('dashboard/product')->with('success', 'Product deleted sucessfully!!');
         } else {
-            return redirect('product')->with('fail', 'Something Went wrong!! Adarsh ki galti hogi');
+            return redirect('dashboard/product')->with('fail', 'Something Went wrong!! Adarsh ki galti hogi');
         }
     }
 

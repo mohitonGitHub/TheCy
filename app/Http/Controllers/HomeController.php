@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
@@ -18,13 +19,13 @@ class HomeController extends Controller
 
     public function allItem()
     {
-        $product = Product::all();
+        $product = Product::with('type')->get();
         return view('all-item', compact('product'));
     }
 
     public function singleProduct($id)
     {
-        $data = Product::findOrfail($id);
+        $data = Product::with('type')->findOrfail($id);
         return view('single-product', compact('data'));
     }
 

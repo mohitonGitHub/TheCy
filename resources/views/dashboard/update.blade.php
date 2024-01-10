@@ -21,8 +21,6 @@
             </a>
         </div>
 
-
-
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="card shadow mb-4">
@@ -34,6 +32,7 @@
                             <form action="{{ route('product.update', $update->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="mb-3">
@@ -98,9 +97,21 @@
                                             <div class="mb-3 text-center">
                                                 <label for="" class="form-label">Choose file</label>
                                                 <input type="file" class="form-control" name="product_image[]"
-                                                    id="" multiple>
-                                                <img src="../../../product_image/{{ $update->product_image }}"
-                                                    class="mt-2" alt="{{ $update->product_image }}" width="50%">
+                                                    id="" multiple value="{{ $update->product_image }}">
+                                                <input type="text" class="form-control"
+                                                    value="{{ $update->product_image }}" name="product_old_image" hidden>
+                                                @php
+                                                    $con = json_decode($update->product_image);
+                                                @endphp
+                                                @if (is_array($con))
+                                                    @foreach ($con as $img)
+                                                        <img src="../../../product_image/{{ $img }}"
+                                                            class="mt-2" alt="{{ $img }}" width="35%">
+                                                    @endforeach
+                                                @else
+                                                    <img src="../../../product_image/{{ $update->product_image }}"
+                                                        class="mt-2" alt="{{ $update->product_image }}" width="55%">
+                                                @endif
                                                 @error('product_image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

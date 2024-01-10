@@ -57,7 +57,11 @@
                                     <tr>
                                         <td>{{ $item->product_name }}</td>
                                         <td>{{ $item->product_sub_name }}</td>
-                                        <td>{{ $item->product_type }}</td>
+                                        <td>
+                                            @if ($item->product_type !== null)
+                                                {{ $item->type->product_type }}
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($item->gender == 'M')
                                                 Male
@@ -70,9 +74,18 @@
                                             @endif
                                         </td>
                                         <td>
-
-                                            <img src="../product_image/{{ $item->product_image }}" alt=""
-                                                style="width: 50px;">
+                                            @php
+                                                $con = json_decode($item->product_image);
+                                            @endphp
+                                            @if ($con !== null)
+                                                @foreach ($con as $img)
+                                                    <img src="../../../product_image/{{ $img }}" class="mt-2"
+                                                        alt="{{ $img }}" width="45px">
+                                                @endforeach
+                                            @else
+                                                <img src="../../product_image/{{ $item->product_image }}" alt=""
+                                                    style="width: 50px;">
+                                            @endif
                                         </td>
                                         <td>
                                             <form method="POST" action="{{ route('product.destroy', $item->id) }}">

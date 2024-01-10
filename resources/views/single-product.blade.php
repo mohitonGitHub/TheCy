@@ -62,14 +62,19 @@
         <h6 id="heading">all-item\{{ $data->product_name }}</h6>
         <div class="row">
             <div class="col-12 col-md-12 col-lg-6 text-center">
-                <img src="../product_image/{{ $data->product_image }}" alt="{{ $data->product_name }}" class="img-fluid">
+                @php
+                    $cov = json_decode($data->product_image);
+                    $str = implode(' ', $cov);
+                    // dd($str);
+                @endphp
+                <img src="../product_image/{{ $str }}" alt="{{ $str }}" class="img-fluid">
             </div>
             <div class="col-12 col-md-12 col-lg-6">
                 <div>
                     <h1 class="" style="font-size: 4rem; font-weight: 600;">{{ $data->product_name }}</h1>
-                    <h2 class="" >{{ $data->product_sub_name }}</h2>
+                    <h2 class="">{{ $data->product_sub_name }}</h2>
                     <br>
-                    <div class="row">                       
+                    <div class="row">
                         <div class="col-md-6">
                             <span class="sub-heading"> {{ $data->type->product_type }} </span>
                         </div>
