@@ -143,7 +143,6 @@
     </style>
 @endsection
 @section('content')
-
     <div class="home1">
         <div class="container">
             <div class="row justify-content-center">
@@ -219,7 +218,7 @@
     </section>
 
 
-    
+
 
 
     {{-- products --}}
@@ -278,22 +277,27 @@
             @foreach ($product as $item)
                 <div class="col-6 col-md-4 col-lg-3 mt-4">
                     <a href="">
-                        <img src="product_image/{{ $item->product_image }}" class="img-fluid"
-                            alt="{{ $item->product_name }}">
+                        @php 
+                            $cov = json_decode($item->product_image);
+                            $str = implode(' ', $cov);
+                            // dd($str);
+                        @endphp
+                        <img src="../product_image/{{ $str }}" alt="{{ $str }}" class="img-fluid">
+                        
                     </a>
                     <div class="row justify-content-center align-items-center g-2 mt-1 pb-1"
                         style="border-bottom: 1px solid rgba(128, 128, 128, 0.723);">
-                        <div class="col-6">
+                        <div class="col-12">
                             <h5 class="item-font float-start"><strong>{{ $item->product_name }}</strong></h5>
                         </div>
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <h5 class="item-font float-end"><strong>₹ {{ $item->product_price }}</strong></h5>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row pt-1">
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <span class="mb-0" style="font-weight: 400" id="rs">{{ $item->product_type }}</span>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @endforeach

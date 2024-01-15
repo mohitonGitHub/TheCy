@@ -338,7 +338,7 @@
                         @foreach ($product as $item)
                             @php
                                 $cov = json_decode($item->product_image);
-                                $str = implode(" ",$cov);
+                                $str = implode(' ', $cov);
                                 // dd($str);
                             @endphp
                             <div class="col-6 col-md-3 col-lg-2 mt-4">
@@ -348,12 +348,17 @@
                                 </a>
                                 <div class="row justify-content-center align-items-center g-2 mt-1 pb-1"
                                     style="border-bottom: 1px solid rgba(128, 128, 128, 0.723);">
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <h5 class="item-font float-start"><strong>{{ $item->product_name }}</strong></h5>
                                     </div>
-                                    <div class="col-6">
-                                        <h5 class="item-font float-end"><strong>{{ $item->type->product_type }}</strong></h5>
-                                    </div>
+                                    {{-- <div class="col-6">
+                                        <h5 class="item-font float-end"><strong>
+                                                @if (isset($item->type->product_type))
+                                                    {{ $item->type->product_type }}
+                                                @endif
+                                            </strong>
+                                        </h5>
+                                    </div> --}}
                                 </div>
                                 {{-- <div class="row pt-1">
                                     <div class="col-md-6">
@@ -369,7 +374,7 @@
             </div>
         </div>
     </div>
-    {{-- <div class="fixed-bottom">        
+    {{-- <div class="fixed-bottom">
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -567,18 +572,6 @@
             $('.close').on('click', function() {
                 $('.blc').css('filter', 'none');
             });
-
-            // function applyBlurEffect() {
-            //     $('.blc').css("filter", "blur(1.5px)");
-            // }
-
-            // function removeBlurEffect() {
-            //     $('.blc').css('filter', 'none');
-            // }
-
-            // $('#sort, #filter').on('click', applyBlurEffect);
-            // $('.close').on('click', removeBlurEffect);
-
 
             // sortingggg
             $('#sorting').on('change', function() {

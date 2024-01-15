@@ -53,11 +53,11 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Products</span></a>
             </li>
-
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
                     <span>Master</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -67,8 +67,13 @@
                     </div>
                 </div>
             </li>
-
+            
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('dashboard/inquiries') }}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Inquiries</span></a>
+            </li>
 
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

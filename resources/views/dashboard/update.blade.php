@@ -58,15 +58,14 @@
                                         <div class="mb-3">
                                             <label for="" class="form-label">Type</label>
                                             <select class="form-control" name="product_type">
-                                                <option disabled>Choose Product Type</option>
+                                                <option value="">Choose Product Type</option>
                                                 @foreach ($Ptype as $item)
                                                     <option value="{{ $item->id }}"
-                                                        @if ($update->product_type == $item->id) selected @endif>
+                                                        @if ($update->product_type == $item->id)  selected @endif>
                                                         {{ $item->product_type }}
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                             @error('product_type')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

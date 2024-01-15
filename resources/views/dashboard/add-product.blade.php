@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-body">
                         <div class="container-fluid" style="width: 95%;">
-                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data"> 
+                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3">
@@ -92,8 +92,8 @@
                                     <div class="col-md-2">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Choose file</label>
-                                            <input type="file" id="product_img" class="form-control" name="product_image[]"
-                                                id="" multiple>                                     
+                                            <input type="file" id="product_img" class="form-control"
+                                                name="product_image[]" id="" multiple>
                                             @error('product_image')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -112,11 +112,9 @@
                                     </div>
                                     <div class="col-md-2" id="submitbutton">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ url('/dashboard/product') }}"
-                                            class="btn btn-outline-primary">Back</a>
+                                        <a href="{{ url('/dashboard/product') }}" class="btn btn-outline-primary">Back</a>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>

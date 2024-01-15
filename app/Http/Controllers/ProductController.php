@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductType;
-
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $Ptype = Product::with('type')->get(); 
+        $Ptype = ProductType::all();
         return view('dashboard/add-product', compact('Ptype'));
     }
 
@@ -36,12 +36,11 @@ class ProductController extends Controller
         $store->product_details = $request->product_details;
         $store->gender = $request->gender;
 
-
-        $images = $request->product_image;
+        $images = $request->product_image;        
         if ($images) {
             foreach ($images as $image) {
                 $imageName = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('product_image'), $imageName); // Store image in storage
+                $image->move(public_path('product_image'), $imageName);
                 $imgarr[] = $imageName;
             }
             $obj = json_encode($imgarr);
@@ -81,7 +80,7 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {        
+    {
         $request->validate([
             'product_name' => 'required',
             'product_details' => 'required',
@@ -103,7 +102,7 @@ class ProductController extends Controller
             }
             $obj = json_encode($imgarr);
             $update->product_image = $obj;
-        }else{
+        } else {
             $update->product_image = $request->product_old_image;
         }
         $update->save();
@@ -118,6 +117,14 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $delete = Product::findorfail($id);
+        $dl = json_decode($delete->product_image);
+        $d = implode($dl);
+
+        $file_path = public_path('product_image') . '/' . $d;
+        if (File::exists($file_path)) {
+            File::delete($file_path);
+        }
+
         $delete->delete();
 
         if ($delete) {

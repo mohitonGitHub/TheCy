@@ -165,6 +165,9 @@
                             <a class="nav-link" href="{{ url('/services') }}">Services</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('/contact') }}">Contact us</a>
                         </li>
                     </ul>
@@ -252,6 +255,9 @@
                         </li>
                         <li class="list-inline-item">
                             <a href="#!"><i class="fa-brands fa-facebook-f"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#!"><i class="fa-brands fa-linkedin-in"></i></a>
                         </li>
                     </ul>
                 </div>

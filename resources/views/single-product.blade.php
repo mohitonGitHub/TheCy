@@ -34,6 +34,19 @@
 
         #heading {
             margin: 0rem 0rem 1.2rem 0rem;
+            color:black;      
+            transition: 0.3s ease-in-out;  
+        }
+        #heading a{
+            color:black;
+            text-decoration: none;
+        }
+        #heading a:hover{
+            color:black;
+            text-decoration: none;
+        }
+        #heading:hover {
+            color: rgb(178, 21, 21);      
         }
 
         @media (max-width: 786px) {
@@ -59,7 +72,9 @@
     </div>
 
     <div class="container">
-        <h6 id="heading">all-item\{{ $data->product_name }}</h6>
+        <h6 id="heading">
+            <a href="{{ url('all-items') }}">all-item</a>\<a href="">{{ $data->product_name }}</a>
+        </h6>
         <div class="row">
             <div class="col-12 col-md-12 col-lg-6 text-center">
                 @php
@@ -76,7 +91,11 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <span class="sub-heading"> {{ $data->type->product_type }} </span>
+                            <span class="sub-heading">
+                                @if (isset($data->type->product_type))
+                                    {{ $data->type->product_type }}
+                                @endif
+                            </span>
                         </div>
                     </div><br>
                     <div class="row">

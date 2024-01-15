@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,13 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+
 Route::get('/all-items', [HomeController::class, 'allItem'])->name('all-item');
 Route::get('/single-product/{id}', [HomeController::class, 'singleProduct'])->name('single-product');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+Route::resource('/contact', ContactController::class);
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+
 Route::post('/contact_store', [HomeController::class, 'contact_store'])->name('contact_store');
 Route::get('/sorting', [HomeController::class, 'sorting'])->name('sorting');
 
@@ -35,6 +40,8 @@ Route::get('/services', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('/dashboard/product', ProductController::class);
+
+    Route::get('/dashboard/inquiries', [ContactController::class, 'inquiries']);
 
     Route::get('dashboard/product-type', [ProductController::class, 'product_type']);
     Route::get('dashboard/add-product-type', function () {

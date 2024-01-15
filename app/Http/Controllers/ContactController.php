@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contact;
+use PDO;
 
 class ContactController extends Controller
 {
@@ -11,7 +13,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return view('contact');
     }
 
     /**
@@ -27,7 +29,27 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'number' => 'required|numeric|min:10, max:10',
+            'canwecall' => 'required',
+            'inquiry' => 'required',
+        ]);
+
+        $store = new Contact();
+        $store->name = $request->name;
+        $store->email = $request->email;
+        $store->number = $request->number;
+        $store->inquiry = $request->inquiry;
+        $store->canwecall = $request->canwecall;
+        $store->save();
+
+        if ($store) {
+            return redirect('contact')->with('success', 'Thank you for reaching out. We will respond promptly.');
+        } else {
+            return redirect('contact')->with('fail', 'Something went wrong!!');
+        }
     }
 
     /**
@@ -35,7 +57,6 @@ class ContactController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -60,5 +81,11 @@ class ContactController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function inquiries()
+    {
+        $inq = Contact::all();
+        return view('dashboard/inquiries', compact('inq'));
     }
 }

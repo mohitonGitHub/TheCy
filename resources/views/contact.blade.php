@@ -155,7 +155,7 @@
             <div class="col-md-9">
                 <div class="row align-items-center">
                     <div class="col-lg-12 mb-5 mb-lg-0">
-                        <form class="mb-5" action="{{ url('contact_store') }}" method="POST" id="contactForm"
+                        <form class="mb-5" action="{{ route('contact.store') }}" method="POST" id="contactForm"
                             name="contactForm">
                             @csrf
                             <div class="row">
