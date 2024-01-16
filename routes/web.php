@@ -21,8 +21,10 @@ use Illuminate\Support\Facades\Artisan;
 Route::get('/clear-cache', function(){
     Artisan::call('cache:clear');
 });
-Route::get('/opyimize', function(){
-    Artisan::call('cache:clear');
+
+Route::get('/optimize', function(){
+    Artisan::call('optimize');
+    return Artisan::output();
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
