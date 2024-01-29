@@ -40,6 +40,10 @@
             font-size: 6rem;
         }
 
+        .responsive-font-h1{
+            font-size: clamp(5rem, 5vw, 6rem);
+        }
+
         .fa-star {
             color: #ff1b1b;
             font-size: 3.5rem;
@@ -158,7 +162,7 @@
     </div>
 
     {{-- some of informations --}}
-    <section id="about" class="about section-padding mt-5">
+    {{-- <section id="about" class="about section-padding mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-12 mt-md-5">
@@ -216,61 +220,13 @@
             </div>
         </div>
     </section>
-
+ --}}
 
 
 
 
     {{-- products --}}
-    <h1 class="text-center product-headline text-focus-in">Products</h1>
-    {{-- <div class="container d-flex" id="products">
-        <div class="row">
-            <div class="col-6 col-md-4 col-lg-4 col-xl-3 product">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1633966887768-64f9a867bdba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2003&q=80"
-                        class="card-img-top img-fluid" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Green Tshirt</h5>
-                        <p class="card-text">$299</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-4 col-xl-3 product">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1633966887768-64f9a867bdba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2003&q=80"
-                        class="card-img-top img-fluid" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Green Tshirt</h5>
-                        <p class="card-text">$299</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-4 col-xl-3 product">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1633966887768-64f9a867bdba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2003&q=80"
-                        class="card-img-top img-fluid" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Green Tshirt</h5>
-                        <p class="card-text">$299</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-4 col-xl-3 product">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1633966887768-64f9a867bdba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2003&q=80"
-                        class="card-img-top img-fluid" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Green Tshirt</h5>
-                        <p class="card-text">$299</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+    {{-- <h1 class="text-center product-headline text-focus-in">Products</h1>  
 
     <div class="container d-flex my-5">
         <div class="row">
@@ -289,26 +245,18 @@
                         style="border-bottom: 1px solid rgba(128, 128, 128, 0.723);">
                         <div class="col-12">
                             <h5 class="item-font float-start"><strong>{{ $item->product_name }}</strong></h5>
-                        </div>
-                        {{-- <div class="col-6">
-                            <h5 class="item-font float-end"><strong>₹ {{ $item->product_price }}</strong></h5>
-                        </div> --}}
-                    </div>
-                    <div class="row pt-1">
-                        {{-- <div class="col-md-6">
-                            <span class="mb-0" style="font-weight: 400" id="rs">{{ $item->product_type }}</span>
-                        </div> --}}
-                    </div>
+                        </div>                    
+                    </div>                
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
-
+ 
     <div class="container my-5">
         <div class="row">
             <div class="col-12 col-lg-12 col-sm-12 text-center">
-                <h1 id="OurServices"> <strong>Our <br> Services</strong></h1>
+                <h1 class="responsive-font-h1"> <strong>Our <br> Services</strong></h1>
                 <p style="color: #3e3b3b;">We offer high-quality, cost-effective products that suit your brand
                     identity.</p>
             </div>

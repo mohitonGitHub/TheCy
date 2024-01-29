@@ -24,8 +24,20 @@
             background-size: 16px 12px;
             border: 1px solid #ced4da;
             transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        }
+        }   
 
+        .relative {
+            color:#000000;
+            text-decoration: none;            
+            /* border: 1px solid black; */
+            border: none !important;
+            transition: 0.3s ease-in-out;
+        }
+        
+        .relative:hover {
+            color: #b21515;
+        }
+     
         .select:hover {
             /* color: white; */
             /* background-color: rgb(220, 86, 86); */
@@ -203,7 +215,7 @@
         </div>
     </div>
     <div class="container my-5 blc">
-        <h1 class="text-center product-headline my-3">Products</h1>
+        <h1 class="text-center product-headline my-3">Our <span style="color: ;">Products</span></h1>
         {{-- sprting and filter for larger screens --}}
         <div class="row">
             {{-- <div class="col-lg-3 Large_screen_sorting">
@@ -368,11 +380,15 @@
                                     </div>
                                 </div> --}}
                             </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                            <div class="mt-5 d-flex justify-content-center">
+                                {!! $product->links() !!}
+                            </div>
+                    </div>                   
                 </div>
             </div>
         </div>
+
     </div>
     {{-- <div class="fixed-bottom">
         <div class="accordion" id="accordionExample">

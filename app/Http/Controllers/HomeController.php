@@ -19,7 +19,8 @@ class HomeController extends Controller
 
     public function allItem()
     {
-        $product = Product::with('type')->get();
+        $product = Product::with('type')->simplePaginate(4);
+        // dd($product);
         return view('all-item', compact('product'));
     }
 
@@ -82,5 +83,6 @@ class HomeController extends Controller
 
     public function blog()
     {
+        return view('blog');
     }
 }
